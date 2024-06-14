@@ -20,12 +20,12 @@ body{
 
 .left{
   background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);
-  width: 15%;
+  width: 18%;
   height: 100vh;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-right: 2px solid rgb(49, 82, 94);
-  padding: 0.5rem;
 
+  padding: 0.5rem;
 }
 .right{
   width: 80%;
@@ -49,14 +49,15 @@ body{
 }
 
 
+
 .note{
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   /* border: 2px solid royalblue; */
   margin: 1rem auto;
-  justify-content: center;
-  padding: 0.5rem;
+  /* justify-content: center; */
+  padding: 1rem 0.5rem;
   font-family: Reddit Mono  , sans-serif;
   cursor: pointer;
   /* background-color: lightgoldenrodyellow; */
@@ -68,6 +69,39 @@ body{
  
 }
 
-.background{
-  background-color: antiquewhite;
+
+.note.selected {
+  background-color: #DCD9D4;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), radial-gradient(at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.50) 50%);
+  background-blend-mode: soft-light,screen;
+
+}
+
+@media screen and (max-width:1200px) {
+  .left{
+     width: 25%;
+  }
+  .right{
+    width: 70%;
+  }
+}
+
+@media screen and (max-width:850px) {
+  .left{
+     width: 30%;
+  }
+  .right{
+    width: 65%;
+    height: 90vh;
+  }
+}
+
+@media screen and (max-width:650px) {
+   
+  .heading{
+    padding: 1rem;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+  
 }

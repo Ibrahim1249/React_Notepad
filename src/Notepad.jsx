@@ -8,7 +8,7 @@ function Notepad() {
     const [currentNote,setCurrentNote] = useState(0);
     const [notes, setNotes] = useState(
     localStorage.getItem("notes") === null 
-    ? [{title: "# Enter title here",content: "# Enter title here",}]
+    ? [{title: "# Enter title here",content: "# Enter title here", id:Date.now()}]
     : JSON.parse(localStorage.getItem("notes")) 
   )
 
@@ -16,16 +16,23 @@ function Notepad() {
       setNotes([...notes,{
         title: "# Enter title here",
         content: "# Enter title here",
+        id:Date.now()
       }])
     }
 
-    function deleteNote(e,idx){
-        const copyNote = [...notes];
-        copyNote.splice(idx, 1);
-        setNotes(copyNote);
+    function deleteNote(e,id){
+      e.stopPropagation()
+    
+
+        let copyNote = notes.filter((note)=>{
+           return note.id !== id
+        })
+
+        setNotes(copyNote)
     }
 
     function changeCurrentNote(e,index){
+        
         setCurrentNote(index)
     }
     function changesToNoteContent(text){
@@ -39,6 +46,8 @@ function Notepad() {
              localStorage.setItem("notes",JSON.stringify(notes));
           }
       },[notes])
+
+  
 
     //   useEffect(()=>{
     //     if(localStorage.getItem("notes")){
@@ -56,12 +65,13 @@ function Notepad() {
         </div>
         <div className="notes-container">
               {notes.map((note,index)=>{
-                return <Note key={index} deleteNote={deleteNote} id={index} changeCurrentNote={changeCurrentNote} title={note.title}/>
+                return <Note key={index} deleteNote={deleteNote} currentId={index} id={note.id}  changeCurrentNote={changeCurrentNote} title={note.title} 
+                isSelected={currentNote === index} />
               })}
         </div>
      </div>
       <div className="right" data-color-mode="light">
-        <MDEditor height={"80vh"} value={notes[currentNote].content}  onChange={(value) => changesToNoteContent(value)}  autoFocus />
+        <MDEditor height={"100%"} value={notes[currentNote].content}  onChange={(value) => changesToNoteContent(value)}  autoFocus />
       </div>
      </div>
     </>
